@@ -8,8 +8,14 @@
 
 plugins {
     // Apply the java-library plugin to add support for Java Library
-    id 'java-library'
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+   // id 'java-library'
 }
+group = 'com.java'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -35,4 +41,15 @@ dependencies {
 	compile group: "com.graphql-java", name: "graphql-java", version: "11.0"
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.5.RELEASE'
 	compile group: "com.twilio.sdk", name: "twilio", version: "8.0.0"
+}
+
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'MyProject',  
+        	'Implementation-Version': version,
+        	'Main-Class': 'com.java.demo.MyProject'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
