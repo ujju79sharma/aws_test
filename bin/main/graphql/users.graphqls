@@ -1,0 +1,21 @@
+type Users {
+
+	userId: Int,
+	name: String,
+	rollNo: Int,
+	marks: Int,
+	school: String
+	
+}
+
+type Query {
+
+	findUserById(userId: Long): Users
+	
+}
+
+type Mutation {
+	
+	createAUser(name: String, rollNo: Int, marks: Int, school: String): Users
+	
+}
